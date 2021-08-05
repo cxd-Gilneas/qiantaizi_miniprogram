@@ -1,0 +1,23 @@
+.text-section {
+  width: 100%;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+.text-section .text-section-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  padding-bottom: 10rpx;
+  padding-top: 10rpx;
+}
+.text-section .textinput-section {
+  font-size: 36rpx;
+  padding: 20rpx;
+  background-color: #FFFFFF;
+}
+.mini-btn .button {
+  display: flex;
+}
+.mini-btn .button button {
+  justify-content: center;
+  align-content: center;
+}

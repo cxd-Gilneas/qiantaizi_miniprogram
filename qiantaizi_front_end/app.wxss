@@ -1,0 +1,20 @@
+/* 初始化页面样式：在微信小程序中不支持通配符 '*' ，所以初始化样式的时候需要把一个个标签都写上 */
+page,view,text,image,navigator{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* 初始化主题颜色：通过变量来实现
+    1 less 中存在变量的使用
+    2 原生的css和wxss也支持变量的使用
+    在这里使用wxss原生的变量    
+*/
+page{
+    /* 设置变量定义主题颜色 */
+    --themeColor:#44b6eb;
+    /* 定义统一字体大小 假设设计稿大小是375px
+        则1px=2rpx
+        18px=36rpx
+     */
+}

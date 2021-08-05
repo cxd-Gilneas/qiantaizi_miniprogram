@@ -1,0 +1,74 @@
+<view class="icon-box">
+    <view class="icon-small">
+      <icon type="success" size="23"></icon>
+    </view>
+    <view class="icon-annotation">
+      <view>代表该位置还有空余台子</view>
+    </view>
+</view>
+
+<view class="icon-box">
+    <view class="icon-small">
+      <icon type="info_circle" size="23"></icon>
+    </view>
+    <view class="icon-annotation">
+      <view>代表该位置刚好签满，如果抢红包金额较少可能可以签到</view>
+    </view>
+</view>
+
+<view class="icon-box">
+    <view class="icon-small">
+      <icon type="cancel" size="23"></icon>
+    </view>
+    <view class="icon-annotation">
+      <view>代表该位置已经爆满，大概率签不上了</view>
+    </view>
+</view>
+
+<view class="monitoring-box">
+    <view class="day"></view>
+    <view class="time">
+      <view>1</view>
+    </view>
+    <view class="time">
+      <view>2</view>
+    </view>
+    <view class="time">
+      <view>3</view>
+    </view>
+    <view class="time">
+      <view>4</view>
+    </view>
+</view>
+
+<view class="monitoring-box"
+wx:for="{{day_monitoring}}"
+wx:key="day"
+>
+    <view class="day">
+        <view>{{item.day}}</view>
+    </view>
+    <view class="time">
+      <icon type="{{item.first}}" size="23"></icon>
+    </view>
+    <view class="time">
+      <icon type="{{item.second}}" size="23"></icon>
+    </view>
+    <view class="time">
+      <icon type="{{item.third}}" size="23"></icon>
+    </view>
+    <view class="time">
+      <icon type="{{item.forth}}" size="23"></icon>
+    </view>
+</view>
+
+<view class="help">
+    <view style="font-weight: bold">签台子流程：</view>
+    <view>1 值日生在群里发红包，并且在管理员界面登录之后，点击"本周开始签台子"按钮，以清空之前的记录</view>
+    <view>2 每个人到签台子首页填写本周需要的台子的时间，实时监测页面（即本页面）可以提供实时的台子量，下拉页面可以刷新</view>
+    <view>3 等大家都提交之后，值日生在管理员界面点击"核验是否有未签人员"，并通知未签台子的人员</view>
+    <view>4 值日生点击"输出本周签台子情况"，看大致有多少人没签上台子</view>
+    <view>5 值日生在“下载本周签台子表”变绿之后，在电脑上进入网址：http://ziaode.ren:5000/download下载，得到一个初始excel文件，复制粘贴到标准格式中即可打印</view>
+    <view>注1：签台子首页的重复提交会覆盖上一次的记录，故想要修改的时候直接再次填写并提交即可</view>
+    <view>注2：暂不提供本科生签台子服务，请值日生签完之后手动添加</view>
+</view>

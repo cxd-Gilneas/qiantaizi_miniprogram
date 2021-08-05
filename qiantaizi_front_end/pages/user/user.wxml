@@ -1,0 +1,16 @@
+<view class="text-section" style="background: gainsboro">
+  <view class="text-section-title">管理员密码</view>
+  <view class="textinput-section">
+    <input type="text" password="true" bindinput="bindinputPassword"/>
+  </view>
+</view>
+
+<view class="mini-btn" style="margin: 0 auto">
+  <view class="button">
+    <button size='mini' type="primary" bindtap='bindLogin'>登录</button>
+  </view>
+</view>
+
+<mp-dialog title="登陆提示" show="{{showSubmitDialog}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+    <view>密码错误</view>
+</mp-dialog>

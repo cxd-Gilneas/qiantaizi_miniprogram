@@ -1,0 +1,6 @@
+主要需要安装的包：
+flask
+numpy
+pandas
+openpyxl
+另外，自己写的qiantaizi_4.py也需要放一份到虚拟环境包中

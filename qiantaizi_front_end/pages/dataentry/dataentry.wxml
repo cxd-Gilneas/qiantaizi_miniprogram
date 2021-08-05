@@ -1,0 +1,29 @@
+<view class="annotation" style="color: red">
+  请在此处录入学号和姓名相关信息
+</view>
+
+<view class="text-section" style="background: gainsboro">
+  <view class="text-section-title">学号</view>
+  <view class="textinput-section">
+    <input type="text" bindinput="bindinputstudentID"/>
+  </view>
+</view>
+
+<view class="text-section" style="background: gainsboro">
+  <view class="text-section-title">姓名</view>
+  <view class="textinput-section">
+    <input type="text" bindinput="bindinputName"/>
+  </view>
+</view>
+
+<view class="mini-btn" style="margin: 0 auto">
+  <button size='mini' type="primary" bindtap='bindSubmit'>提交</button>
+</view>
+
+<mp-dialog title="提交结果" show="{{showSubmitDialog_true}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+  <view>提交成功</view>
+</mp-dialog>
+
+<mp-dialog title="提交结果" show="{{showSubmitDialog_false}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+  <view>学号或姓名已存在</view>
+</mp-dialog>

@@ -1,0 +1,23 @@
+{
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "admin",
+          "pathName": "pages/admin/admin",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

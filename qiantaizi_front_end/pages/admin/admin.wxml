@@ -1,0 +1,58 @@
+<view class="data-entry-section">
+  <view class="data-entry-title">点击这里录入个人信息</view>
+  <navigator class="data-entry" url="/pages/dataentry/dataentry">
+    <button size='mini' type="primary">录入个人信息</button>
+  </navigator>
+</view>
+
+<view class="btn" style="margin: 0 auto">
+  <view class="button">
+    <button type="primary" plain="true" bindtap='bindStart'>本周开始签台子</button>
+  </view>
+  <view class="button">
+    <button type="default" bindtap='bindCheck'>核验是否有未签人员</button>
+  </view>
+  <view class="button">
+    <button type="primary" bindtap='bindExport'>输出本周签台子情况</button>
+  </view>
+  <view class="button">
+    <button type="primary" disabled='{{downloadbutton}}' bindtap='bindDownload'>下载本周签台子表（灰色代表后台还没有生成）</button>
+  </view>
+</view>
+
+<mp-dialog title="提示" show="{{showSubmitDialog_start_true}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+  <view>数据已初始化，请通知同学们开始签台子</view>
+</mp-dialog>
+
+<mp-dialog title="提示" show="{{showSubmitDialog_start_false}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+  <view>未知错误</view>
+</mp-dialog>
+
+<mp-dialog title="未签人员名单" show="{{showSubmitDialog_check_true}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+  <view>{{uncommitted}}未签台子</view>
+</mp-dialog>
+
+<mp-dialog title="提示" show="{{showSubmitDialog_check_false}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+  <view>未知错误</view>
+</mp-dialog>
+
+<mp-dialog title="签台子情况" show="{{showSubmitDialog_export_true}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+  <view
+  wx:for="{{cuowei}}"
+  wx:key="*this">
+  {{item}}
+  </view>
+  <view
+  wx:for="{{sign_failed}}"
+  wx:key="*this">
+  {{item}}
+  </view>
+</mp-dialog>
+
+<mp-dialog title="提示" show="{{showSubmitDialog_export_false}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+  <view>未知错误</view>
+</mp-dialog>
+
+<mp-dialog title="下载签台子表" show="{{showSubmitDialog_download_true}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+  <view>请在电脑上输入网址下载：{{downloadwebsite}}</view>
+</mp-dialog>

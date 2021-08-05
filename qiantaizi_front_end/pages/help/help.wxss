@@ -1,0 +1,60 @@
+.icon-box {
+  width: 100%;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  display: flex;
+}
+.icon-box .icon-small {
+  flex: 1;
+}
+.icon-box .icon-small icon {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.icon-box .icon-annotation {
+  flex: 3;
+  font-size: 34rpx;
+}
+.icon-box .icon-annotation view {
+  display: flex;
+  justify-content: left;
+  align-content: center;
+}
+.monitoring-box {
+  width: 100%;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  display: flex;
+}
+.monitoring-box .day {
+  flex: 1;
+  font-size: 32rpx;
+}
+.monitoring-box .day view {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.monitoring-box .time {
+  flex: 1;
+}
+.monitoring-box .time view {
+  font-size: 32rpx;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.monitoring-box .time icon {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.help {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+.help view {
+  font-size: 34rpx;
+  margin-top: 5rpx;
+}
