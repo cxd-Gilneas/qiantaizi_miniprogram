@@ -116,10 +116,18 @@ def qiantaizi(lunshu):
                 
                 for k in range(15, -1, -1):  # 本轮第二次签不论当日的哪一个台子，反正只要签上一个就行,给其略差的台子
                     if str(df2[taizi_day][k]) == ' ':  # 如果有空，直接填写名字
-                        df2[taizi_day][k] = name
-                        df1[j][i] = -1  # 将已经填入的进行记录
-                        cuowei.append(str(name + j + '第' + str(lunshu - 1) + '轮' + '错位'))
-                        break
+                        isSamePersonInSameTime = False  # 定义一个标签，用于看当前空位置的同时间段的其它位置是否被同一个人签了，签了则True，不进行下面的给台子操作，没签则False
+                        for l in [-12, -8, -4, 4, 8, 12]:
+                            try:
+                                if(str(df2[taizi_day][k + l]) == name):
+                                    isSamePersonInSameTime = True
+                            except:
+                                continue
+                        if isSamePersonInSameTime == False:
+                            df2[taizi_day][k] = name
+                            df1[j][i] = -1  # 将已经填入的进行记录
+                            cuowei.append(str(name + j + '第' + str(lunshu - 1) + '轮' + '错位'))
+                            break
                 if df1[j][i] == lunshu:  # 真的签不上的情况下
                     sign_failed.append(str(name + j + '第' + str(lunshu - 1) + '轮' + '无'))
 
@@ -144,12 +152,23 @@ def qiantaizi(lunshu):
                     
                     for k in range(15, -1, -1):  # 本轮第二次签不论当日的哪一个台子，反正只要签上一个就行,给其略差的台子
                         if str(df2[taizi_day][k]) == ' ':  # 如果有空，直接填写名字
-                            df2[taizi_day][k] = name
-                            df1[j][i] = -1  # 将已经填入的进行记录
-                            cuowei.append(str(name + j + '第' + str(lunshu) + '轮' + '错位'))
-                            break
+                            isSamePersonInSameTime = False  # 定义一个标签，用于看当前空位置的同时间段的其它位置是否被同一个人签了，签了则True，不进行下面的给台子操作，没签则False
+                            for l in [-12, -8, -4, 4, 8, 12]:
+                                try:
+                                    if(str(df2[taizi_day][k + l]) == name):
+                                        isSamePersonInSameTime = True
+                                except:
+                                    continue
+                            if isSamePersonInSameTime == False:
+                                df2[taizi_day][k] = name
+                                df1[j][i] = -1  # 将已经填入的进行记录
+                                cuowei.append(str(name + j + '第' + str(lunshu) + '轮' + '错位'))
+                                break
                     if df1[j][i] == lunshu:  # 真的签不上的情况下
                         sign_failed.append(str(name + j + '第' + str(lunshu) + '轮' + '无'))
+
+
+
 
 
 def polish(df):  # 把需要连台的同学的位置拼到一起 注意：该函数目前只能处理二连台，当遇见需要三连台或更多时，很可能出各种bug
@@ -164,6 +183,9 @@ def polish(df):  # 把需要连台的同学的位置拼到一起 注意：该函
             elif  m < 11:
                 flag = 1  # 当在为第三个台子拼接时，查看后面一个台子
             if str(df[date[i]][m]) != ' ':  # 当该位置有人签时
+                if m in set([0, 1, 4, 5, 8, 9]):  # 只有当想要换的隔壁时间段的台子可以组成连台时（即想要换的隔壁时间段的台子的下一个时间段是连续的）
+                    if df[date[i]][m + 1] == df[date[i]][m + 2]:  # 如果想要换的隔壁时间段的台子本身是连台情况，则不换
+                        continue
                 for k in range(0, flag):  # 查看该时间点的后三（或二或一）个台子是否有可以拼接的连台
                     if df[date[i]][m] == df[date[i]][m + 5 + k*4]:  # 如果该时间点的后一个时间点有签台子，则将后一个时间点的两个台子名字交换
                         temp = df[date[i]][m + 1]
@@ -178,8 +200,11 @@ def polish(df):  # 把需要连台的同学的位置拼到一起 注意：该函
             elif  n < 12:
                 flag = 1  # 当在为第三个台子拼接时，查看后面一个台子
             if str(df[date[i]][n]) != ' ':  # 当该位置有人签时
+                if n in set([2, 3, 6, 7, 10, 11]):  # 只有当想要换的隔壁时间段的台子可以组成连台时（即想要换的隔壁时间段的台子的上一个时间段是连续的）
+                    if df[date[i]][n - 1] == df[date[i]][n - 2]:  # 如果想要换的目标台子本身是连台情况，则不换
+                        continue
                 for k in range(0, flag):  # 查看该时间点的后三（或二或一）个台子是否有可以拼接的连台
-                    if df[date[i]][n] == df[date[i]][n + 3 + k*4]:  # 如果该时间点的前一个时间点有签台子，则将前一个时间点的两个台子名字交换
+                    if df[date[i]][n] == df[date[i]][n + 3 + k*4]:  # 如果该时间点的前一个时间点有签台子，则将前一个时间点的两个台子名字交换                   
                         temp = df[date[i]][n - 1]
                         df[date[i]][n - 1] = df[date[i]][n + 3 + k*4]
                         df[date[i]][n + 3 + k*4] = temp
