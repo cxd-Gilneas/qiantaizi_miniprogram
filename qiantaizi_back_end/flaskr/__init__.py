@@ -215,6 +215,7 @@ def create_app(test_config=None):
 
                     else:  # 如果第i轮没有签台子
                         continue
+                os.system("@copy instance\\flaskr.sqlite backup")
                 print(f"成功录入了{studentID}的一次签台子信息")
                 return dict(success = True, message = "信息提交成功")
 
