@@ -1,4 +1,5 @@
 import os
+import time
 
 from flask import Flask
 from flask import request
@@ -216,6 +217,8 @@ def create_app(test_config=None):
                     else:  # 如果第i轮没有签台子
                         continue
                 os.system("@copy instance\\flaskr.sqlite backup")
+                str_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())
+                os.rename("backup\\flaskr.sqlite", f"backup\\flaskr{str_time}.sqlite")
                 print(f"成功录入了{studentID}的一次签台子信息")
                 return dict(success = True, message = "信息提交成功")
 
