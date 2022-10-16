@@ -6,12 +6,9 @@
 ------------
 
 ## 前端：qiantaizi_front_end
-### 1 cloud 文件夹
-  里面包含的是一个云函数qiantaizi_https，用于绕过微信小程序的访问限制（小程序只能访问https），通过云函数的服务器执行http访问该小程序的实际服务器
-  注意：node.js需要安装并部署到云函数的服务器上，此处没有显示
-### 2 app.js app.json project.config.json等文件
+### 1 app.js app.json project.config.json等文件
   小程序的全局配置文件
-### 3 pages 文件夹
+### 2 pages 文件夹
   小程序的主体代码，其中包括多个页面，如index、help、admin等，其js文件、wxml文件、wxss文件等都在其中
   
 ------------
@@ -24,15 +21,18 @@
   基于flask框架的后端代码
 #### 2） db.py 文件
   数据库的创建与连接代码
-#### 3） qiantaizi_4.py 文件
+#### 3） qiantaizi_4.py 文件和qiantaizi_5.py 文件
   签台子功能实现的核心代码
 #### 4） schema.sql 文件
   创建数据库的SQL语句
+#### 5） MyAPScheduler.py 文件
+  用于进行定时任务：每周的固定时间进行数据初始化
 
 ### 2 instance 文件夹
   用于存储实例
 
 ### 3 venv 文件夹
-  后端的虚拟环境，主要需要安装flask、numpy、pandas、openpyxl包。另外，自己写的qiantaizi_4.py也需要放一份到虚拟环境包中
+  后端的虚拟环境，主要需要安装flask、numpy、pandas、openpyxl、requests、apscheduler包。另外，自己写的qiantaizi_4.py和qiantaizi_5.py也需要放一份到虚拟环境包中
   
-  
+### 4 backup 文件夹  
+  用于存放签台子时的备份数据
