@@ -24,42 +24,16 @@ Page({
   // 登录按钮的事件响应函数
   bindLogin: function(e) {
     console.log(e.detail.value)
-    // wx.request({
-    //   url: getApp().globalData.website + 'user',
-    //   method: 'GET',
-    //   data: {
-    //     password: this.data.password
-    //   },
-    //   header: {'content-type': 'application/json'},
-    //   success:(result) => {
-    //     console.log(result);
-    //     if (result.data.success) {
-    //       wx.navigateTo({
-    //         url: '/pages/admin/admin'
-    //         })
-    //     }
-    //     else {
-    //       this.setData({  // 如果密码错误，那么出现弹窗
-    //         showSubmitDialog: true
-    //       })
-    //     }
-    //   }
-    // })
-
-    wx.cloud.callFunction({
-      name: 'qiantaizi_https',
+    wx.request({
+      url: getApp().globalData.website + 'user',
+      method: 'PUT',
       data: {
-        url: getApp().globalData.website + 'user',
-        method: 'PUT',
-        data: {
-          password: this.data.password
-        }
-      }
-    })
-      .then(res => {
-        console.log('成功', res);
-        let result = JSON.parse(res.result)  // 将接口数据转为json格式
-        if (result.success) {
+        password: this.data.password
+      },
+      header: {'content-type': 'application/json'},
+      success:(result) => {
+        console.log(result);
+        if (result.data.success) {
           wx.navigateTo({
             url: '/pages/admin/admin'
             })
@@ -69,10 +43,36 @@ Page({
             showSubmitDialog: true
           })
         }
-      })
-      .catch(res => {
-        console.log('失败', res);
-      })
+      }
+    })
+
+    // wx.cloud.callFunction({
+    //   name: 'qiantaizi_https',
+    //   data: {
+    //     url: getApp().globalData.website + 'user',
+    //     method: 'PUT',
+    //     data: {
+    //       password: this.data.password
+    //     }
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log('成功', res);
+    //     let result = JSON.parse(res.result)  // 将接口数据转为json格式
+    //     if (result.success) {
+    //       wx.navigateTo({
+    //         url: '/pages/admin/admin'
+    //         })
+    //     }
+    //     else {
+    //       this.setData({  // 如果密码错误，那么出现弹窗
+    //         showSubmitDialog: true
+    //       })
+    //     }
+    //   })
+    //   .catch(res => {
+    //     console.log('失败', res);
+    //   })
   },
 
   // 弹窗的确定按钮的点击事件响应函数

@@ -29,7 +29,7 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-
+    
     
     # 用户资料endpoint
     # R READ读取数据 /GET
@@ -231,7 +231,7 @@ def create_app(test_config=None):
         if request.method == 'PUT':
             password = request.json.get('password')
             print(password)
-            if password == '这里是你自己设置的密码':
+            if password == '52digua':
                 print("成功登录管理员界面")
                 return dict(success = True)
             else:
@@ -342,15 +342,26 @@ def create_app(test_config=None):
                     connection.execute(f"UPDATE qiantaizi SET Money = 1024, {taizi_day[i]}{taizi_time[j]} = {count} WHERE studentID = 1024")  # 给每个时间点的台子数计数                    
             cursor.close()
             connection.commit()
-            # 3 输出签台子结果
-            import qiantaizi_4
-            try:
-                result_df, result_cuowei, result_sign_failed = qiantaizi_4.QIANTAIZI(connection)
-                result_df.to_excel("qiantaizi_result.xlsx")
-                print("成功输出了签台子的结果")
-                return dict(success = True, data = [result_cuowei, result_sign_failed])
-            except:
-                return dict(success = False)
+            # 3 根据是签4个台子还是签5个台子输出签台子结果
+            NumberIdx = request.json.get('NumberIdx')
+            if (NumberIdx == 4):
+                import qiantaizi_4
+                try:
+                    result_df, result_cuowei, result_sign_failed = qiantaizi_4.QIANTAIZI(connection)
+                    result_df.to_excel("qiantaizi_result.xlsx")
+                    print("成功输出了签台子的结果")
+                    return dict(success = True, data = [result_cuowei, result_sign_failed])
+                except:
+                    return dict(success = False)
+            elif (NumberIdx == 5):
+                import qiantaizi_5
+                try:
+                    result_df, result_cuowei, result_sign_failed = qiantaizi_5.QIANTAIZI(connection)
+                    result_df.to_excel("qiantaizi_result.xlsx")
+                    print("成功输出了签台子的结果")
+                    return dict(success = True, data = [result_cuowei, result_sign_failed])
+                except:
+                    return dict(success = False)           
 
     @app.route('/check', methods=['PUT'])  # 首页获取本人当前签台子情况
     def check():

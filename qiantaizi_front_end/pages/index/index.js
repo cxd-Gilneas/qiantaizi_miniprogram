@@ -33,28 +33,45 @@ Page({
     console.log(this.data.Name);
     console.log(this.data.studentID);
 
-    wx.cloud.callFunction({
-      name: 'qiantaizi_https',
+    wx.request({
+      url: getApp().globalData.website + 'check',
+      method: 'PUT',
       data: {
-        url: getApp().globalData.website + 'check',
-        method: 'PUT',
-        data: {
-          studentID: this.data.studentID,
-          Name: this.data.Name
-        }
-      }
-    })
-      .then(res => {
-        console.log('成功', res);
-        let result = JSON.parse(res.result)  // 将接口数据转为json格式
+        studentID: this.data.studentID,
+        Name: this.data.Name
+      },
+      header: {'content-type': 'application/json'},
+      success:(result) => {
+        console.log(result);
         this.setData({  // 如果成功提交，那么出现弹窗
-          qiantaizi_check: result.data,
+          qiantaizi_check: result.data.data,
           showCheckDialog: true
         })
-      })
-      .catch(res => {
-        console.log('失败', res);
-      })
+      }
+    })
+
+    // wx.cloud.callFunction({
+    //   name: 'qiantaizi_https',
+    //   data: {
+    //     url: getApp().globalData.website + 'check',
+    //     method: 'PUT',
+    //     data: {
+    //       studentID: this.data.studentID,
+    //       Name: this.data.Name
+    //     }
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log('成功', res);
+    //     let result = JSON.parse(res.result)  // 将接口数据转为json格式
+    //     this.setData({  // 如果成功提交，那么出现弹窗
+    //       qiantaizi_check: result.data,
+    //       showCheckDialog: true
+    //     })
+    //   })
+    //   .catch(res => {
+    //     console.log('失败', res);
+    //   })
   },
 
   // 存储学号框的事件响应函数
@@ -268,67 +285,67 @@ Page({
   bindSubmit(e){
     console.log(this.data.Name);
     console.log(this.data.studentID);
-    // wx.request({
-    //   url: getApp().globalData.website,
-    //   method: 'PUT',
-    //   data: {
-    //     studentID: this.data.studentID,
-    //     Name: this.data.Name,
-    //     Money: this.data.Money,
-    //     multiIndex1: this.data.multiIndex1,
-    //     multiIndex2: this.data.multiIndex2,
-    //     multiIndex3: this.data.multiIndex3,
-    //     multiIndex4: this.data.multiIndex4,
-    //     multiIndex5: this.data.multiIndex5,
-    //     multiIndex6: this.data.multiIndex6,
-    //   },
-    //   header: {'content-type': 'application/json'},
-    //   success:(result) => {
-    //     console.log(result);
-    //     this.setData({  // 如果成功提交，那么出现弹窗
-    //       showSubmitDialog_message: result.data.message,
-    //       showSubmitDialog: true
-    //     })
-    //     wx.setStorage({  // 如果提交成功，那么缓存用户信息
-    //       key: "userInfo",
-    //       data: this.data
-    //     })
-    //   }
-    // })
-
-    wx.cloud.callFunction({
-      name: 'qiantaizi_https',
+    wx.request({
+      url: getApp().globalData.website,
+      method: 'PUT',
       data: {
-        url: getApp().globalData.website,
-        method: 'PUT',
-        data: {
-          studentID: this.data.studentID,
-          Name: this.data.Name,
-          Money: this.data.Money,
-          multiIndex1: this.data.multiIndex1,
-          multiIndex2: this.data.multiIndex2,
-          multiIndex3: this.data.multiIndex3,
-          multiIndex4: this.data.multiIndex4,
-          multiIndex5: this.data.multiIndex5,
-          multiIndex6: this.data.multiIndex6,
-        }
-      }
-    })
-      .then(res => {
-        console.log('成功', res);
-        let result = JSON.parse(res.result)
+        studentID: this.data.studentID,
+        Name: this.data.Name,
+        Money: this.data.Money,
+        multiIndex1: this.data.multiIndex1,
+        multiIndex2: this.data.multiIndex2,
+        multiIndex3: this.data.multiIndex3,
+        multiIndex4: this.data.multiIndex4,
+        multiIndex5: this.data.multiIndex5,
+        multiIndex6: this.data.multiIndex6,
+      },
+      header: {'content-type': 'application/json'},
+      success:(result) => {
+        console.log(result);
         this.setData({  // 如果成功提交，那么出现弹窗
-          showSubmitDialog_message: result.message,
+          showSubmitDialog_message: result.data.message,
           showSubmitDialog: true
         })
         wx.setStorage({  // 如果提交成功，那么缓存用户信息
           key: "userInfo",
           data: this.data
         })
-      })
-      .catch(res => {
-        console.log('失败', res);
-      })
+      }
+    })
+
+    // wx.cloud.callFunction({
+    //   name: 'qiantaizi_https',
+    //   data: {
+    //     url: getApp().globalData.website,
+    //     method: 'PUT',
+    //     data: {
+    //       studentID: this.data.studentID,
+    //       Name: this.data.Name,
+    //       Money: this.data.Money,
+    //       multiIndex1: this.data.multiIndex1,
+    //       multiIndex2: this.data.multiIndex2,
+    //       multiIndex3: this.data.multiIndex3,
+    //       multiIndex4: this.data.multiIndex4,
+    //       multiIndex5: this.data.multiIndex5,
+    //       multiIndex6: this.data.multiIndex6,
+    //     }
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log('成功', res);
+    //     let result = JSON.parse(res.result)
+    //     this.setData({  // 如果成功提交，那么出现弹窗
+    //       showSubmitDialog_message: result.message,
+    //       showSubmitDialog: true
+    //     })
+    //     wx.setStorage({  // 如果提交成功，那么缓存用户信息
+    //       key: "userInfo",
+    //       data: this.data
+    //     })
+    //   })
+    //   .catch(res => {
+    //     console.log('失败', res);
+    //   })
   },
 
   // 清空按钮的点击事件响应函数

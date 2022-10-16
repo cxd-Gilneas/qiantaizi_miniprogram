@@ -1,7 +1,7 @@
 <view class="text-section" style="background: gainsboro">
   <view class="text-section-title">管理员密码</view>
   <view class="textinput-section">
-    <input type="text" password="true" bindinput="bindinputPassword"/>
+    <input type="text" password="true" bindinput="bindinputPassword" placeholder="在此填写密码，注意区分大小写"/>
   </view>
 </view>
 

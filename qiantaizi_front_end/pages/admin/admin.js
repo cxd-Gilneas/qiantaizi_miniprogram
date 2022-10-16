@@ -28,136 +28,184 @@ Page({
 
   // 本周开始签台子按钮的点击事件响应函数
   bindStart(e){
-    wx.cloud.callFunction({
-      name: 'qiantaizi_https',
-      data: {
-        url: getApp().globalData.website + 'admin',
-        method: 'POST',
-        data: {}
-      }
-    })
-      .then(res => {
-        console.log('成功', res);
-        let result = JSON.parse(res.result)
-        if(result.success){
+    wx.request({
+      url: getApp().globalData.website + 'admin',
+      method: 'POST',
+      data: {},
+      success:(result) => {
+        console.log(result);
+        if (result.data.success) {
           this.setData({  // 如果成功提交，那么出现弹窗
             showSubmitDialog_start_true: true
           })
         }
-        else{
-          this.setData({  // 如果提交失败，那么出现弹窗
+        else {
+          this.setData({
             showSubmitDialog_start_false: true
           })
         }
-      })
-      .catch(res => {
-        console.log('失败', res);
-      })
+      }
+    })
+
+    // wx.cloud.callFunction({
+    //   name: 'qiantaizi_https',
+    //   data: {
+    //     url: getApp().globalData.website + 'admin',
+    //     method: 'POST',
+    //     data: {}
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log('成功', res);
+    //     let result = JSON.parse(res.result)
+    //     if(result.success){
+    //       this.setData({  // 如果成功提交，那么出现弹窗
+    //         showSubmitDialog_start_true: true
+    //       })
+    //     }
+    //     else{
+    //       this.setData({  // 如果提交失败，那么出现弹窗
+    //         showSubmitDialog_start_false: true
+    //       })
+    //     }
+    //   })
+    //   .catch(res => {
+    //     console.log('失败', res);
+    //   })
   },
 
   // 核验是否有未签人员按钮的点击事件响应函数
   bindCheck(e){
-    // wx.request({
-    //   url: getApp().globalData.website + 'admin',
-    //   method: 'GET',
-    //   data: {},
-    //   success:(result) => {
-    //     console.log(result);
-    //     if (result.data.success) {
-    //       this.setData({
-    //         uncommitted: result.data.data,
-    //         showSubmitDialog_check_true: true,
-    //       })
-    //     }
-    //     else {
-    //       this.setData({
-    //         showSubmitDialog_check_false: true
-    //       })
-    //     }
-    //   }
-    // })
-
-    wx.cloud.callFunction({
-      name: 'qiantaizi_https',
-      data: {
-        url: getApp().globalData.website + 'admin',
-        method: 'GET',
-        data: {}
-      }
-    })
-      .then(res => {
-        console.log('成功', res);
-        let result = JSON.parse(res.result)
-        if(result.success){
-          this.setData({  // 如果成功提交，那么出现弹窗
-            uncommitted: result.data,
+    wx.request({
+      url: getApp().globalData.website + 'admin',
+      method: 'GET',
+      data: {},
+      success:(result) => {
+        console.log(result);
+        if (result.data.success) {
+          this.setData({
+            uncommitted: result.data.data,
             showSubmitDialog_check_true: true,
           })
         }
-        else{
-          this.setData({  // 如果提交失败，那么出现弹窗
+        else {
+          this.setData({
             showSubmitDialog_check_false: true
           })
         }
-      })
-      .catch(res => {
-        console.log('失败', res);
-      })
-  },
-
-  // 输出本周签台子情况按钮的点击事件响应函数
-  bindExport(e){
-    // wx.request({
-    //   url: getApp().globalData.website + 'admin',
-    //   method: 'PUT',
-    //   data: {},
-    //   success:(result) => {
-    //     console.log(result);
-    //     if (result.data.success) {
-    //       this.setData({
-    //         cuowei: result.data.data[0],
-    //         sign_failed: result.data.data[1],
-    //         showSubmitDialog_export_true: true,
-    //         downloadbutton: false
-    //       })
-    //     }
-    //     else {
-    //       this.setData({
-    //         showSubmitDialog_export_false: true
-    //       })
-    //     }
-    //   }
-    // })
-
-    wx.cloud.callFunction({
-      name: 'qiantaizi_https',
-      data: {
-        url: getApp().globalData.website + 'admin',
-        method: 'PUT',
-        data: {}
       }
     })
-      .then(res => {
-        console.log('成功', res);
-        let result = JSON.parse(res.result)
-        if(result.success){
-          this.setData({  // 如果成功提交，那么出现弹窗
-            cuowei: result.data[0],
-            sign_failed: result.data[1],
+
+    // wx.cloud.callFunction({
+    //   name: 'qiantaizi_https',
+    //   data: {
+    //     url: getApp().globalData.website + 'admin',
+    //     method: 'GET',
+    //     data: {}
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log('成功', res);
+    //     let result = JSON.parse(res.result)
+    //     if(result.success){
+    //       this.setData({  // 如果成功提交，那么出现弹窗
+    //         uncommitted: result.data,
+    //         showSubmitDialog_check_true: true,
+    //       })
+    //     }
+    //     else{
+    //       this.setData({  // 如果提交失败，那么出现弹窗
+    //         showSubmitDialog_check_false: true
+    //       })
+    //     }
+    //   })
+    //   .catch(res => {
+    //     console.log('失败', res);
+    //   })
+  },
+
+  // 输出本周签台子情况-四个台子按钮的点击事件响应函数
+  bindExport1(e){
+    wx.request({
+      url: getApp().globalData.website + 'admin',
+      method: 'PUT',
+      data: {
+        NumberIdx: 4
+      },
+      success:(result) => {
+        console.log(result);
+        if (result.data.success) {
+          this.setData({
+            cuowei: result.data.data[0],
+            sign_failed: result.data.data[1],
             showSubmitDialog_export_true: true,
             downloadbutton: false
           })
         }
-        else{
-          this.setData({  // 如果提交失败，那么出现弹窗
+        else {
+          this.setData({
             showSubmitDialog_export_false: true
           })
         }
-      })
-      .catch(res => {
-        console.log('失败', res);
-      })
+      }
+    })
+
+    // wx.cloud.callFunction({
+    //   name: 'qiantaizi_https',
+    //   data: {
+    //     url: getApp().globalData.website + 'admin',
+    //     method: 'PUT',
+    //     data: {}
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log('成功', res);
+    //     let result = JSON.parse(res.result)
+    //     if(result.success){
+    //       this.setData({  // 如果成功提交，那么出现弹窗
+    //         cuowei: result.data[0],
+    //         sign_failed: result.data[1],
+    //         showSubmitDialog_export_true: true,
+    //         downloadbutton: false
+    //       })
+    //     }
+    //     else{
+    //       this.setData({  // 如果提交失败，那么出现弹窗
+    //         showSubmitDialog_export_false: true
+    //       })
+    //     }
+    //   })
+    //   .catch(res => {
+    //     console.log('失败', res);
+    //   })
   },
+
+    // 输出本周签台子情况-五个台子按钮的点击事件响应函数
+    bindExport2(e){
+      wx.request({
+        url: getApp().globalData.website + 'admin',
+        method: 'PUT',
+        data: {
+          NumberIdx: 5
+        },
+        success:(result) => {
+          console.log(result);
+          if (result.data.success) {
+            this.setData({
+              cuowei: result.data.data[0],
+              sign_failed: result.data.data[1],
+              showSubmitDialog_export_true: true,
+              downloadbutton: false
+            })
+          }
+          else {
+            this.setData({
+              showSubmitDialog_export_false: true
+            })
+          }
+        }
+      })
+    },
 
   // 下载本周签台子表按钮的点击事件响应函数
   bindDownload(e){

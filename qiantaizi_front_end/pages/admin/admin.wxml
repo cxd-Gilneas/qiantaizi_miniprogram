@@ -6,14 +6,17 @@
 </view>
 
 <view class="btn" style="margin: 0 auto">
-  <view class="button">
+  <!-- <view class="button">
     <button type="primary" plain="true" bindtap='bindStart'>本周开始签台子</button>
-  </view>
+  </view> -->
   <view class="button">
     <button type="default" bindtap='bindCheck'>核验是否有未签人员</button>
   </view>
   <view class="button">
-    <button type="primary" bindtap='bindExport'>输出本周签台子情况</button>
+    <button type="primary" bindtap='bindExport1'>输出本周签台子情况-四个台子</button>
+  </view>
+  <view class="button">
+    <button type="primary" bindtap='bindExport2'>输出本周签台子情况-五个台子</button>
   </view>
   <view class="button">
     <button type="primary" disabled='{{downloadbutton}}' bindtap='bindDownload'>下载本周签台子表（灰色代表后台还没有生成）</button>

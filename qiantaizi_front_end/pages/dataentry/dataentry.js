@@ -35,44 +35,17 @@ Page({
   bindSubmit(e){
     console.log(this.data.Name);
     console.log(this.data.studentID);
-    // wx.request({
-    //   url: getApp().globalData.website,
-    //   method: 'POST',
-    //   data: {
-    //     studentID: this.data.studentID,
-    //     Name: this.data.Name
-    //   },
-    //   header: {'content-type': 'application/json'},
-    //   success:(result) => {
-    //     console.log(result);
-    //     if(result.data.success){
-    //       this.setData({  // 如果成功提交，那么出现弹窗
-    //         showSubmitDialog_true: true
-    //       })
-    //     }
-    //     else{
-    //       this.setData({  // 如果提交失败，那么出现弹窗
-    //         showSubmitDialog_false: true
-    //       })
-    //     }
-    //   }
-    // })
-
-    wx.cloud.callFunction({
-      name: 'qiantaizi_https',
+    wx.request({
+      url: getApp().globalData.website,
+      method: 'POST',
       data: {
-        url: getApp().globalData.website,
-        method: 'POST',
-        data: {
-          studentID: this.data.studentID,
-          Name: this.data.Name
-        }
-      }
-    })
-      .then(res => {
-        console.log('成功', res);
-        let result = JSON.parse(res.result)
-        if(result.success){
+        studentID: this.data.studentID,
+        Name: this.data.Name
+      },
+      header: {'content-type': 'application/json'},
+      success:(result) => {
+        console.log(result);
+        if(result.data.success){
           this.setData({  // 如果成功提交，那么出现弹窗
             showSubmitDialog_true: true
           })
@@ -82,10 +55,37 @@ Page({
             showSubmitDialog_false: true
           })
         }
-      })
-      .catch(res => {
-        console.log('失败', res);
-      })
+      }
+    })
+
+    // wx.cloud.callFunction({
+    //   name: 'qiantaizi_https',
+    //   data: {
+    //     url: getApp().globalData.website,
+    //     method: 'POST',
+    //     data: {
+    //       studentID: this.data.studentID,
+    //       Name: this.data.Name
+    //     }
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log('成功', res);
+    //     let result = JSON.parse(res.result)
+    //     if(result.success){
+    //       this.setData({  // 如果成功提交，那么出现弹窗
+    //         showSubmitDialog_true: true
+    //       })
+    //     }
+    //     else{
+    //       this.setData({  // 如果提交失败，那么出现弹窗
+    //         showSubmitDialog_false: true
+    //       })
+    //     }
+    //   })
+    //   .catch(res => {
+    //     console.log('失败', res);
+    //   })
   },
 
   // 弹窗的确定按钮的点击事件响应函数

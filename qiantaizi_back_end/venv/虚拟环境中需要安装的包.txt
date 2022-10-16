@@ -3,4 +3,6 @@ flask
 numpy
 pandas
 openpyxl
-另外，自己写的qiantaizi_4.py也需要放一份到虚拟环境包中
+requests
+apscheduler
+另外，自己写的qiantaizi_4.py和qiantaizi_5.py也需要放一份到虚拟环境包中

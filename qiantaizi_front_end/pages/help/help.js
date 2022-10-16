@@ -12,24 +12,37 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.cloud.callFunction({
-      name: 'qiantaizi_https',
-      data: {
-        url: 'http://ziaode.ren:5000/',
-        method: 'GET',
-        data: {}
+    // wx.cloud.callFunction({
+    //   name: 'qiantaizi_https',
+    //   data: {
+    //     url: 'http://ziaode.ren:5000/',
+    //     method: 'GET',
+    //     data: {}
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log('成功', res);
+    //     let result = JSON.parse(res.result)
+    //     this.setData({
+    //       day_monitoring: result.data,
+    //     })
+    //   })
+    //   .catch(res => {
+    //     console.log('失败', res);
+    //   })
+
+    wx.request({
+      url: 'https://ziaode.ren:5000/',
+      method: 'GET',
+      data: {},
+      header: {'content-type': 'application/json'},
+      success:(result) => {
+        console.log(result);
+        this.setData({
+         day_monitoring: result.data.data,
+        });
       }
     })
-      .then(res => {
-        console.log('成功', res);
-        let result = JSON.parse(res.result)
-        this.setData({
-          day_monitoring: result.data,
-        })
-      })
-      .catch(res => {
-        console.log('失败', res);
-      })
   },
 
   /**
@@ -64,24 +77,37 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.cloud.callFunction({
-      name: 'qiantaizi_https',
-      data: {
-        url: 'http://ziaode.ren:5000/',
-        method: 'GET',
-        data: {}
+    // wx.cloud.callFunction({
+    //   name: 'qiantaizi_https',
+    //   data: {
+    //     url: 'http://ziaode.ren:5000/',
+    //     method: 'GET',
+    //     data: {}
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log('成功', res);
+    //     let result = JSON.parse(res.result)
+    //     this.setData({
+    //       day_monitoring: result.data,
+    //     })
+    //   })
+    //   .catch(res => {
+    //     console.log('失败', res);
+    //   })
+
+    wx.request({
+      url: 'https://ziaode.ren:5000/',
+      method: 'GET',
+      data: {},
+      header: {'content-type': 'application/json'},
+      success:(result) => {
+        console.log(result);
+        this.setData({
+         day_monitoring: result.data.data,
+        });
       }
     })
-      .then(res => {
-        console.log('成功', res);
-        let result = JSON.parse(res.result)
-        this.setData({
-          day_monitoring: result.data,
-        })
-      })
-      .catch(res => {
-        console.log('失败', res);
-      })
   },
 
   /**
